@@ -1,0 +1,24 @@
+[Distribution]
+Distribution=ubuntu
+Release=jammy
+
+[Output]
+Bootable=yes
+#SecureBoot=yes
+KernelCommandLine=!loglevel loglevel=7
+
+[Content]
+Repositories=main,universe
+Packages=efivar,linux-image-5.15.0-25-generic,linux-modules-5.15.0-25-generic,vim,swupdate
+Password=root
+
+[Partitions]
+RootSize=2G
+HomeSize=2G
+ESPSize=512M
+
+[Validation]
+BMap=true
+
+[Host]
+QemuHeadless=yes

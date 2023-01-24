@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Copy in public key for swupdate and configure swupdate to use it
+cp ../keys/mycert.cert.pem $BUILDROOT/root/
+mkdir -p $BUILDROOT/usr/lib/swupdate/conf.d
+echo 'SWUPDATE_ARGS=" -v -k /root/mycert.cert.pem "' >>  $BUILDROOT/usr/lib/swupdate/conf.d/cert.conf
+
+

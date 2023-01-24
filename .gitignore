@@ -1,0 +1,7 @@
+*~
+*mkosi.cache
+*mkosi.workspace
+*/image*
+
+# Created artifact from build
+rootfs/efi/EFI/Linux/*swudpate-linux.efi

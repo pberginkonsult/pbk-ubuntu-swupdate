@@ -1,0 +1,15 @@
+[Distribution]
+Distribution=ubuntu
+Release=jammy
+
+[Output]
+Format=cpio
+#Format=directory
+CompressOutput=xz
+KernelCommandLine=!loglevel loglevel=7
+
+[Content]
+Repositories=main,universe
+Packages=linux-image-5.15.0-25-generic,linux-modules-5.15.0-25-generic,swupdate,udev
+CleanPackageMetadata=true
+Password=root

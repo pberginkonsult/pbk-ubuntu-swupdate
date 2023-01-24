@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -x
+
+# Move out kernel and other needed files to work directory
+mkdir -p artifacts
+cp $BUILDROOT/boot/vmlinuz artifacts/
+cp $BUILDROOT/usr/lib/os-release artifacts/
+[ -f $BUILDROOT/etc/kernel/cmdline ] && cp $BUILDROOT/etc/kernel/cmdline artifacts/
+[ -f artifacts/cmdline ] || echo "console=ttyS0 loglevel=7 root=/dev/ram0" > artifacts/cmdline
+cp $BUILDROOT/usr/lib/systemd/boot/efi/linuxx64.efi.stub artifacts/
+chmod uga+r artifacts/vmlinuz
+rm -f $BUILDROOT/boot/*
+
+# Use systemd as /init
+ln -s /usr/lib/systemd/systemd $BUILDROOT/init
+
+# Copy in public key for swupdate and configure swupdate to use it
+cp ../keys/mycert.cert.pem $BUILDROOT/root/
+mkdir -p $BUILDROOT/usr/lib/swupdate/conf.d
+echo 'SWUPDATE_ARGS=" -v -k /root/mycert.cert.pem "' >>  $BUILDROOT/usr/lib/swupdate/conf.d/cert.conf

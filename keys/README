@@ -1,0 +1,2 @@
+# To create pem files
+$ openssl req -x509 -newkey rsa:4096 -nodes -keyout mycert.key.pem -out mycert.cert.pem -subj "/O=SWUpdate /CN=target"
